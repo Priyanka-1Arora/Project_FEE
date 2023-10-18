@@ -1,0 +1,8 @@
+.cont{
+    background-color: antiquewhite;
+}
+a{
+    display: inline-block; /* Set a tags to display as inline-block */
+    text-decoration: none; /* Remove underline from links */
+    color: inherit;
+}
