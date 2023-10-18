@@ -1,3 +1,30 @@
-.img{
+/* body{
+    background-color:rgba(199, 224, 234, 0.931);
+} */
+/* body{
+    /* background-color:thistle; 
+} */
+.img1{
     height:300px;
+    /* color:rgba(199, 224, 234, 0.931); */
+}
+.section-style{
+    background-color:rgba(194, 229, 236, 0.931);
+    border-radius:25px
+}
+.col-sm-6 >button:hover{
+    background-color:rgb(2, 2, 125);
+}
+.para{
+    font-weight: 900;
+    font-size:55px;;
+}
+.anchor:hover{
+    border-bottom:2px solid black;
+}
+.img{
+    height:100px;
+}
+.cont{
+    background-color: rgb(201, 218, 218);
 }

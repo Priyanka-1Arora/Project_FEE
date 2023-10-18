@@ -14,26 +14,30 @@ let k={
     name:"Jyoti"
 }
 function dlt(o){
-    let str=o.innerHTML.trim().charAt(o.innerHTML.length-1);
-    console.log(str)
+    console.log(o.innerHTML)
+    let index=0;
+    for(let i=0;i<o.innerHTML.trim().length;i++){
+        if(o.innerHTML.trim().charAt(i)>='0' && o.innerHTML.trim().charAt(i)<='9'){
+            index=i;
+            break;
+        }
+    }
+    let str=o.innerHTML.trim().slice(index,o.innerHTML.length)
     localStorage.removeItem(Number(str));
     cmnts=[];
     renderData(cmnts)
-}
-function edit(o){
-
 }
 localStorage.setItem(2,JSON.stringify(k))
 let j=localStorage.length+1;
 function getAllCmnts(cmnts){
     var dataRows=cmnts.map((item)=>{
         return `
-        <div class="row mb-3 mx-auto" style="background-color:bisque;border-radius:25px">
-        <h5 class="p-4">UserName:${item.name}</h5>
-        <h5 class="pb-4 px-4">Id:${item.id}</h5>
-        <p class="pb-4 px-4 mx-0">${item.cmnt}</p>
-        <button class="btn-primary mx-4 mb-4 mnt-2" onclick="dlt(this.previousElementSibling.previousElementSibling)" style="height:80px;width:200px;border-radius:20px">Delete Comment</button>
-        <button class=" btn-primary mx-4 mb-4 mnt-2" onclick="edit" data-bs-toggle="modal" data-bs-target="#editModal" style="height:80px;width:200px;border-radius:20px">Edit Comment</button>
+        <div class="row mb-3 mx-auto section-style"  >
+        <h5 class="p-2 px-4 pt-3">UserName: ${item.name}</h5>
+        <h5 class="pb-2 px-4">Id:${item.id}</h5>
+        <p class="pb-2 px-4 mx-0">${item.cmnt}</p>
+        <button class="btn-primary mx-4 mb-3 mnt-4" onclick="dlt(this.previousElementSibling.previousElementSibling)" style="height:60px;width:200px;border-radius:20px">Delete Comment</button>
+        <button class=" btn-primary mx-4 mb-3 mnt-4" onclick="edit(this.previousElementSibling.previousElementSibling.previousElementSibling)" data-bs-toggle="modal" data-bs-target="#editModal" style="height:60px;width:200px;border-radius:20px">Edit Comment</button>
         </div>
         `
     })
@@ -52,7 +56,6 @@ function submitComment() {
         cmnts = [];
         userName.value=""
         userComment.value=""
-        console.log('After clearing:', userName.value, userComment.value)
         renderData(cmnts);
         let form=document.getElementById("aform")
         form.reset();
@@ -62,7 +65,7 @@ function submitComment() {
 }
 function sorted() {
     var sortedCmnts = cmnts.sort(
-      (a, b) => a.id - b.id
+      (a, b) => b.id - a.id
     );
     renderCmnts(sortedCmnts);
 }
@@ -74,13 +77,13 @@ function renderData(cmnts) {
     }
     window.document.getElementById("contain").innerHTML = `
     <div class="row mt-3">
-            <div class="col-sm-2 col-lg-4 col-md-6">
-                <img class="img-fluid img" src="https://www.boat-lifestyle.com/cdn/shop/products/product-Image.png?v=1625813323">
+            <div class="col-sm-4 col-lg-4 col-md-6">
+                <img class="img-fluid img1" src="https://www.boat-lifestyle.com/cdn/shop/products/product-Image.png?v=1625813323">
             </div>
-            <div class="col-sm-6 col-lg-6 mt-5">
-                <h1 class="text-start">boAT Airdopes 101</h1></a>
-                <button class="btn-primary btn mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">Add Comments</button>
-                <button class="btn-primary btn mb-3" onclick="sorted()">Sort Comments</button>
+            <div class="col-sm-6 col-lg-6 mt-5 col-md-3">
+                <p class="text-start para">boAT Airdopes 101</p></a>
+                <button class="btn-primary btn mb-3" style="padding:20px;border-radius:20px" data-bs-toggle="modal" data-bs-target="#commentModal">Add Comments</button>
+                <button class="btn-primary btn mb-3" style="padding:20px;border-radius:20px" onclick="sorted()">Sort Comments</button>
             </div>
     </div>
     ${getAllCmnts(cmnts)}`;
@@ -88,13 +91,13 @@ function renderData(cmnts) {
 function renderCmnts(cmnt){
     window.document.getElementById("contain").innerHTML = `
     <div class="row mt-3">
-            <div class="col-sm-2 col-lg-4 col-md-6">
-                <img class="img-fluid img" src="https://www.boat-lifestyle.com/cdn/shop/products/product-Image.png?v=1625813323">
+            <div class="col-sm-4 col-lg-4 col-md-6">
+                <img class="img-fluid img1" src="https://www.boat-lifestyle.com/cdn/shop/products/product-Image.png?v=1625813323">
             </div>
-            <div class="col-sm-6 col-lg-6 mt-5">
-                <h1 class="text-start">boAT Airdopes 101</h1></a>
-                <button class="btn-primary btn mb-3" onclick="Add()"data-bs-toggle="modal" data-bs-target="#commentModal">Add Comments</button>
-                <button class="btn-primary btn mb-3" onclick="sorted()">Sort Comments</button>
+            <div class="col-sm-6 col-lg-6 mt-5 col-md-3">
+                <p class="text-start para">boAT Airdopes 101</p></a>
+                <button class="btn-primary btn mb-3" style="padding:20px;border-radius:20px" onclick="Add()"data-bs-toggle="modal" data-bs-target="#commentModal">Add Comments</button>
+                <button class="btn-primary btn mb-3" style="padding:20px;border-radius:20px" onclick="sorted()">Sort Comments</button>
             </div>
     </div>
     ${getAllCmnts(cmnt)}`;
@@ -109,12 +112,39 @@ $(document).ready(function() {
 function Add(){
     $('#commentModal').modal('show'); // Show the modal
 }
-function edit(event){
+function edit(o){
+    let index=0;
+    for(let i=0;i<o.innerHTML.trim().length;i++){
+        if(o.innerHTML.trim().charAt(i)>='0' && o.innerHTML.trim().charAt(i)<='9'){
+            index=i;
+            break;
+        }
+    }
+    let str=o.innerHTML.trim().slice(index,o.innerHTML.length)
+    localStorage.setItem(-1,str)
+    localStorage.setItem(-2,localStorage.getItem(str));
+    console.log(localStorage.getItem(-1))
+    console.log(localStorage.getItem(-2))
     $('#editModal').modal('show');
 }
 
 function editChanges(o){
-    console.log(o)
+    let userComment = document.getElementById("useromment").value;
+    console.log(userComment)
+    if(userComment){
+        let index=localStorage.getItem(-1);
+        const obj=JSON.parse(localStorage.getItem(-2));
+        const newObj={
+            cmnt:userComment,
+            name:obj.name
+        }
+        localStorage.setItem(index,JSON.stringify(newObj));
+        localStorage.removeItem(-1)
+        localStorage.removeItem(-2)
+        cmnts=[]
+        let form=document.getElementById("form2");
+        form.reset();
+        renderData(cmnts);
+    }
+    $('#editModal').modal('hide');
 }
-
-// Rest of your code remains the same...

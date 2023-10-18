@@ -6,3 +6,9 @@ a{
     text-decoration: none; /* Remove underline from links */
     color: inherit;
 }
+.anchor:hover{
+    border-bottom:2px solid black;
+}
+.img{
+    height:100px;
+}
