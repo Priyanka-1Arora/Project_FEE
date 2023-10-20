@@ -26,7 +26,7 @@ function getAllCmnts(cmnts){
         <h5 class="p-2 px-4 pt-3">UserName: ${item.name}</h5>
         <h5 class="pb-2 px-4">Id:${item.id}</h5>
         <p class="pb-2 px-4 mx-0">${item.cmnt}</p>
-        <button class="btn-primary mx-4 mb-3 mnt-4" onclick="dlt(this.previousElementSibling.previousElementSibling)" style="height:60px;width:200px;border-radius:20px">Delete Comment</button>
+        <button class="btn-primary mx-4 mb-3 mnt-4 deletebtn" onclick="dlt(this.previousElementSibling.previousElementSibling)" style="height:60px;width:200px;border-radius:20px">Delete Comment</button>
         <button class=" btn-primary mx-4 mb-3 mnt-4" onclick="edit(this.previousElementSibling.previousElementSibling.previousElementSibling)" data-bs-toggle="modal" data-bs-target="#editModal" style="height:60px;width:200px;border-radius:20px">Edit Comment</button>
         </div>
         `
