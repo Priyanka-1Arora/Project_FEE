@@ -2,17 +2,8 @@ var Comment = function (cmnt,id,name) {
     this.cmnt = cmnt;
     this.id = id;
     this.name=name
-  };
+};
 let cmnts=[]
-let g={
-    cmnt:"It is a good product.I have used it and got a good experience",
-    name:"Priyanka"
-}
-localStorage.setItem(1,JSON.stringify(g))
-let k={
-    cmnt:"It is not a good product.I have used it and don't got a good experience",
-    name:"Jyoti"
-}
 function dlt(o){
     console.log(o.innerHTML)
     let index=0;
@@ -27,7 +18,6 @@ function dlt(o){
     cmnts=[];
     renderData(cmnts)
 }
-localStorage.setItem(2,JSON.stringify(k))
 let j=localStorage.length+1;
 function getAllCmnts(cmnts){
     var dataRows=cmnts.map((item)=>{
@@ -67,14 +57,17 @@ function sorted() {
     var sortedCmnts = cmnts.sort(
       (a, b) => b.id - a.id
     );
-    renderCmnts(sortedCmnts);
+    renderCmntsSorted(sortedCmnts);
 }
-function renderData(cmnts) {
+function getfromlocalStorage(){
     for(let i=0;i<localStorage.length;i++){
         let k=localStorage.key(i);
         let obj=JSON.parse(localStorage.getItem(k));
         cmnts.push(new Comment(obj.cmnt,k,obj.name))
     }
+}
+function renderData(cmnts) {
+    getfromlocalStorage(cmnts)
     window.document.getElementById("contain").innerHTML = `
     <div class="row mt-3">
             <div class="col-sm-4 col-lg-4 col-md-6">
@@ -88,7 +81,7 @@ function renderData(cmnts) {
     </div>
     ${getAllCmnts(cmnts)}`;
 }
-function renderCmnts(cmnt){
+function renderCmntsSorted(cmnt){
     window.document.getElementById("contain").innerHTML = `
     <div class="row mt-3">
             <div class="col-sm-4 col-lg-4 col-md-6">

@@ -61,6 +61,16 @@ const listener = function (req, res) {
       }
     });
   }
+  else if (req.url.includes(".avif")) {
+    fs.readFile(`.${req.url}`, (error, data) => {
+      if (data) {
+        res.writeHead(201, {
+          "Content-Type": "text/image",
+        });
+        res.end(data);
+      }
+    });
+  }
   else if (req.url.includes(".png")) {
     fs.readFile(`.${req.url}`, (error, data) => {
       if (data) {
