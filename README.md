@@ -1,5 +1,3 @@
-Certainly! Below is the provided information written in markdown language:
-
 ---
 
 # Focus Review Website with Comment Feature and CRUD Operations
