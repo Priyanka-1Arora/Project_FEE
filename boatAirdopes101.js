@@ -18,7 +18,7 @@ function dlt(o){
     cmnts=[];
     renderData(cmnts)
 }
-let j=localStorage.length+1;
+let j=localStorage.length;
 function getAllCmnts(cmnts){
     var dataRows=cmnts.map((item)=>{
         return `
@@ -42,6 +42,9 @@ function submitComment() {
             cmnt: userComment,
             name: userName
         };
+        do{
+            j+=1;
+        }while(localStorage.getItem(j));
         localStorage.setItem(j, JSON.stringify(obj));
         cmnts = [];
         userName.value=""
